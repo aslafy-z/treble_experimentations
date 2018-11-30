@@ -338,6 +338,10 @@ function patch_things() {
     fi
 }
 
+function patch_bugs() {
+    sed -i '/BOARD_SYSTEMIMAGE_PARTITION_SIZE/d' device/phh/treble/*/BoardConfig.mk
+}
+
 function build_variant() {
     lunch "$1"
     make $extra_make_options BUILD_NUMBER="$rom_fp" installclean
@@ -379,6 +383,7 @@ init_patches
 sync_repo
 fi
 patch_things
+patch_bugs
 jack_env
 
 . build/envsetup.sh
